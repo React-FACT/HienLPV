@@ -1,0 +1,32 @@
+CREATE DATABASE training;
+USE training;
+
+CREATE TABLE authentication (
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(55) DEFAULT NULL,
+    password VARCHAR(255) DEFAULT NULL,
+    actived TINYINT DEFAULT '1',
+    roledId INT DEFAULT NULL,
+    email VARCHAR(55) DEFAULT NULL,
+    firstName VARCHAR(55) DEFAULT NULL,
+    lastName VARCHAR(55) DEFAULT NULL,
+    address VARCHAR(255) DEFAULT NULL,
+    note VARCHAR(255) DEFAULT NULL,
+    filepath VARCHAR(255) DEFAULT NULL,
+    createdBy VARCHAR(50) DEFAULT NULL,
+    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updatedBy VARCHAR(50) DEFAULT NULL,
+    updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE role (
+  id int NOT NULL AUTO_INCREMENT,
+  name varchar(50) DEFAULT NULL,
+  actived tinyint DEFAULT '1',
+  createdBy varchar(50) DEFAULT NULL,
+  createdAt datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updatedBy varchar(50) DEFAULT NULL,
+  updatedAt datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+)

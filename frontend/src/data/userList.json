@@ -1,0 +1,112 @@
+[
+    {
+        "usrID": "001",
+        "fullName": "Admin",
+        "email": "admin@gmail.com",
+        "password": "admin",
+        "birthDate": "1-Jan-1990",
+        "firstLoginDate": "1/1/22 14:00",
+        "lastLoginDate": "1/1/22 17:00",
+        "isAdmin": true,
+        "status": false
+    },
+    {
+        "usrID": "002",
+        "fullName": "Nguyễn Văn B",
+        "email": "nvb@gmail.com",
+        "password": "user",
+        "birthDate": "2-Jan-1990",
+        "firstLoginDate": "1/1/22 14:00",
+        "lastLoginDate": "1/1/22 17:00",
+        "isAdmin": false,
+        "status": false
+    },
+    {
+        "usrID": "003",
+        "fullName": "Nguyễn Văn C",
+        "email": "nvc@gmail.com",
+        "password": "user",
+        "birthDate": "3-Jan-1990",
+        "firstLoginDate": "1/1/22 14:00",
+        "lastLoginDate": "1/1/22 17:00",
+        "isAdmin": false,
+        "status": true
+    },
+    {
+        "usrID": "004",
+        "fullName": "Nguyễn Văn D",
+        "email": "nvd@gmail.com",
+        "password": "user",
+        "birthDate": "4-Jan-1990",
+        "firstLoginDate": "1/1/22 14:00",
+        "lastLoginDate": "1/1/22 17:00",
+        "isAdmin": false,
+        "status": false
+    },
+    {
+        "usrID": "005",
+        "fullName": "Nguyễn Văn E",
+        "email": "nve@gmail.com",
+        "password": "user",
+        "birthDate": "5-Jan-1990",
+        "firstLoginDate": "1/1/22 14:00",
+        "lastLoginDate": "1/1/22 17:00",
+        "isAdmin": false,
+        "status": true
+    },
+    {
+        "usrID": "006",
+        "fullName": "Nguyễn Văn F",
+        "email": "nvf@gmail.com",
+        "password": "user",
+        "birthDate": "6-Jan-1990",
+        "firstLoginDate": "1/1/22 14:00",
+        "lastLoginDate": "1/1/22 17:00",
+        "isAdmin": false,
+        "status": false
+    },
+    {
+        "usrID": "007",
+        "fullName": "Nguyễn Văn G",
+        "email": "nvg@gmail.com",
+        "password": "user",
+        "birthDate": "7-Jan-1990",
+        "firstLoginDate": "1/1/22 14:00",
+        "lastLoginDate": "1/1/22 17:00",
+        "isAdmin": false,
+        "status": true
+    },
+    {
+        "usrID": "008",
+        "fullName": "Nguyễn Văn H",
+        "email": "nvh@gmail.com",
+        "password": "user",
+        "birthDate": "8-Jan-1990",
+        "firstLoginDate": "1/1/22 14:00",
+        "lastLoginDate": "1/1/22 17:00",
+        "isAdmin": false,
+        "status": false
+    },
+    {
+        "usrID": "009",
+        "fullName": "Nguyễn Văn I",
+        "email": "nvi@gmail.com",
+        "password": "user",
+        "birthDate": "9-Jan-1990",
+        "firstLoginDate": "1/1/22 14:00",
+        "lastLoginDate": "1/1/22 17:00",
+        "isAdmin": false,
+        "status": true
+    },
+    {
+        "usrID": "010",
+        "fullName": "Nguyễn Văn J",
+        "email": "nvj@gmail.com",
+        "password": "user",
+        "birthDate": "10-Jan-1990",
+        "firstLoginDate": "1/1/22 14:00",
+        "lastLoginDate": "1/1/22 17:00",
+        "isAdmin": false,
+        "status": false
+    }
+]

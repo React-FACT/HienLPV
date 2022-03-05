@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+
+:root {
+  --color-primary: #00b4d8;
+  --color-light: #caf0f8;
+  --color-medium: #90e0ef;
+  --color-dark: #03045e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+
+body {
+  background: var(--color-light);
+}
+
+input {
+  outline: none;
+}
+
+.loginContainer {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  position: relative;
+  min-width: 300px;
+  background: #fff;
+  padding-bottom: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+  position: relative;
+  margin: 10px;
+}
+
+.form-container .form-title {
+  position: relative;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 5px 10px;
+  background: var(--color-primary);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  overflow: hidden;
+}
+
+.form-container .form-title i {
+  position: absolute;
+  color: rgba(0, 0, 0, 0.5);
+  top: -10px;
+  right: 5px;
+  font-size: 60px;
+}
+
+.form-group i {
+  position: absolute;
+  font-size: 20px;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.form-group input {
+  padding-left: 35px;
+}
+
+.btn-submit {
+  position: absolute;
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  outline-style: solid;
+  outline-color: #fff;
+  outline-width: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  bottom: -25px;
+  transform: translateX(-50%);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.btn-submit:hover {
+  transform: translateX(-50%) scale(1.1);
+}
