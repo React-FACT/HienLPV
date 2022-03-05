@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+:root {
+  --color-primary: #00b4d8;
+  --color-light: #caf0f8;
+  --color-medium: #90e0ef;
+  --color-dark: #03045e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', 'Lato', sans-serif;
+}
+
+body {
+  background: var(--color-light);
+}
+
+textarea {
+  resize: none;
+}
+
+th,
+td {
+  border: 1px solid var(--color-dark) !important;
+  vertical-align: middle !important;
+}
+
+th {
+  text-align: center;
+  background: var(--color-medium) !important;
+  color: var(--color-dark);
+}
+
+span {
+  line-height: 2;
+}
+
+#tbUserList {
+  background: #fff;
+  border-collapse: collapse;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+#tbUserList tr:nth-child(even) {
+  background: var(--color-light);
+}
+
+.delete,
+.edit,
+.view {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.add {
+  background: var(--color-primary) !important;
+  color: var(--color-dark);
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.view {
+  color: green;
+}
+
+.edit {
+  color: blue;
+}
+
+.delete {
+  color: red;
+}
+
+#tbUserList .add:hover {
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+#tbUserList tfoot td {
+  background: var(--color-medium);
+  text-align: right;
+  font-weight: bold;
+}
+
+#tbUserList tfoot td:nth-child(2) {
+  text-align: center;
+  background: var(--color-primary);
+}
+/* modal */
+
+.modal {
+  overflow: hidden;
+}
+
+.modal-header {
+  background-color: var(--color-primary);
+  color: var(--color-dark);
+}
+
+.modal-body {
+  overflow: auto;
+  max-height: 70vh;
+}
+
+.form-label {
+  line-height: 2;
+}
