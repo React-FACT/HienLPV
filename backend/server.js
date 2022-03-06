@@ -13,11 +13,11 @@ const port = process.env.PORT;
 const server = express();
 
 try {
-  // register Controller
-  registerController(server);
-
   server.use(cors());
   server.use(express.json());
+
+  // register Controller
+  registerController(server);
 
   // server.use(bodyParser.urlencoded({ extended: false }));
   // server.use(bodyParser.json());

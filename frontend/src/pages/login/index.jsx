@@ -1,33 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Container, Form, Alert } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 
 import './login.css';
+import { fetchUsers } from '../../redux/action/user';
 
 function Login() {
   // State
   const [userInput, setUserInput] = useState({ email: '', password: '' });
-  const [userList, setUserList] = useState([]);
   const [user, setUser] = useState({});
-  const [alert, setAlert] = useState({});
+  const [alert, setAlert] = useState({ show: false });
+
+  // Redux
+  const userList = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   // Effect
   useEffect(() => {
-    setUserList([
-      {
-        usrID: 1,
-        email: 'admin@gmail.com',
-        password: 'admin',
-        isAdmin: true,
-      },
-      {
-        usrID: 2,
-        email: 'user@gmail.com',
-        password: 'user',
-        isAdmin: false,
-      },
-    ]);
-  }, []);
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   // Function
   const handleAlert = (variant, message) => {
@@ -46,10 +38,12 @@ function Login() {
 
     if (!user) return handleAlert('danger', 'Email or Password is Invalid!');
 
+    if (user.roleId !== 1) handleAlert('success', 'You have user role!');
+
     setUser(user);
   };
 
-  if (user.isAdmin) {
+  if (user.roleId === 1) {
     return <Navigate to='/admin' replace={true} />;
   }
 

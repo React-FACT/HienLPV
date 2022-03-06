@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../../components/Modal';
-import userData from '../../data/userList.json';
+import { fetchUsers } from '../../redux/action/user';
 import './dashboard.css';
 
 function Dashboard() {
   // State
-  const [userList, setUserList] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+
+  // Redux
+  const userList = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   // Effect
   useEffect(() => {
-    setUserList(userData);
-  }, []);
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   return (
     <div className='container-fluid'>
@@ -46,46 +50,46 @@ function Dashboard() {
           {userList.map((user, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{user.usrID}</td>
-              <td>{user.fullName}</td>
+              <td>{user.id}</td>
+              <td>{user.lastName + ' ' + user.firstName}</td>
               <td>{user.email}</td>
-              <td>{user.birthDate}</td>
-              <td>{user.firstLoginDate}</td>
-              <td>{user.lastLoginDate}</td>
+              <td>{new Date().toLocaleDateString()}</td>
+              <td>{new Date().toLocaleDateString()}</td>
+              <td>{new Date().toLocaleDateString()}</td>
               <td>
-                {user.isAdmin ? (
+                {user.roleId === 1 ? (
                   <input type='checkbox' onChange={() => {}} checked />
                 ) : (
                   <input type='checkbox' />
                 )}
               </td>
               <td>
-                {user.status ? (
+                {user.actived === 1 ? (
                   <input type='radio' onChange={() => {}} checked />
                 ) : (
                   <input type='radio' />
                 )}
-                <span>{user.status ? 'Active' : 'Inactive'}</span>
+                <span>{user.actived === 1 ? 'Active' : 'Inactive'}</span>
               </td>
               <td>
                 <i
                   className='fa fa-eye view'
                   aria-hidden='true'
-                  id={user.usrID}
+                  id={user.id}
                 ></i>
               </td>
               <td>
                 <i
                   className='fa fa-pencil edit'
                   aria-hidden='true'
-                  id={user.usrID}
+                  id={user.id}
                 ></i>
               </td>
               <td>
                 <i
                   className='fa fa-trash delete'
                   aria-hidden='true'
-                  id={user.usrID}
+                  id={user.id}
                 ></i>
               </td>
             </tr>
@@ -93,8 +97,10 @@ function Dashboard() {
         </tbody>
         <tfoot>
           <tr>
-            <td colspan='8'>Tổng số đang active</td>
-            <td colspan='4'>{userList.filter((user) => user.status).length}</td>
+            <td colSpan='8'>Tổng số đang active</td>
+            <td colSpan='4'>
+              {userList.filter((user) => user.actived === 1).length}
+            </td>
           </tr>
         </tfoot>
       </table>

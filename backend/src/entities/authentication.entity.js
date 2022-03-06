@@ -7,7 +7,7 @@ class Authentication extends BaseEntity {
   firstName = { type: Sequelize.STRING(50) };
   lastName = { type: Sequelize.STRING(50) };
   email = { type: Sequelize.STRING(50) };
-  roledId = { type: Sequelize.INTEGER };
+  roleId = { type: Sequelize.INTEGER };
   actived = { type: Sequelize.INTEGER };
 }
 module.exports = { Authentication };
