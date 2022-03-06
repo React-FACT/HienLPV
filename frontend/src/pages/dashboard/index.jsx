@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 
 import Modal from '../../components/Modal';
 import { fetchUsers } from '../../redux/action/user';
@@ -53,9 +54,9 @@ function Dashboard() {
               <td>{user.id}</td>
               <td>{user.lastName + ' ' + user.firstName}</td>
               <td>{user.email}</td>
-              <td>{new Date().toLocaleDateString()}</td>
-              <td>{new Date().toLocaleDateString()}</td>
-              <td>{new Date().toLocaleDateString()}</td>
+              <td>{moment(new Date()).format('D/M/Y')}</td>
+              <td>{moment(new Date()).format('D/M/Y')}</td>
+              <td>{moment(new Date()).format('D/M/Y')}</td>
               <td>
                 {user.roleId === 1 ? (
                   <input type='checkbox' onChange={() => {}} checked />

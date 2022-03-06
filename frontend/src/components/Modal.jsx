@@ -6,12 +6,12 @@ import { createUser } from '../redux/action/user';
 
 const modalLabel = {
   add: {
-    title: 'ADD NEW USER',
+    title: 'add new user',
     cancel: 'Cancel',
     submit: 'Save',
   },
   edit: {
-    title: 'EDIT USER',
+    title: 'edit user',
     cancel: 'Cancel',
     submit: 'Change',
   },
@@ -120,7 +120,7 @@ function ModalComponent({ show, onHide, type = 'add' }) {
       <Form>
         <Modal.Header>
           <Modal.Title id='contained-modal-title-vcenter'>
-            {modalLabel[type].title}
+            {modalLabel[type].title.toUpperCase()}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className='show-grid'>

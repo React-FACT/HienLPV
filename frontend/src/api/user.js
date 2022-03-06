@@ -2,9 +2,11 @@ import axios from 'axios';
 
 import { baseURI } from './constant';
 
+const url = baseURI + 'auth/';
+
 const fetchUsers = async () => {
   try {
-    const user = await axios.get(baseURI + 'auth/get-all');
+    const user = await axios.get(url + 'get-all');
     return user.data;
   } catch (e) {
     console.log(e);
@@ -13,7 +15,7 @@ const fetchUsers = async () => {
 
 const createUser = async (data) => {
   try {
-    const user = await axios.post(baseURI + 'auth', data);
+    const user = await axios.post(url, data);
     return user.data;
   } catch (e) {
     console.log(e);
