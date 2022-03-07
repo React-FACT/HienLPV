@@ -1,14 +1,17 @@
 const express = require('express');
 const RoleRouting = express.Router();
-const { CommonMethodConstant, ControllerConstant } = require("../constants/api.constant");
+const {
+  CommonMethodConstant,
+  ControllerConstant,
+} = require('../constants/api.constant');
 const {
   getAll,
   getById,
   create,
   update,
-  remove
+  remove,
 } = require('../controllers/role.constroller');
-RoleRouting.use(express.json())
+RoleRouting.use(express.json());
 
 /**
  * @swagger
@@ -23,7 +26,7 @@ RoleRouting.use(express.json())
  *           type: string
  *         actived:
  *           type: boolean
- * 
+ *
  *     UpdateRoleRequest:
  *       type: object
  *       required:
@@ -33,7 +36,7 @@ RoleRouting.use(express.json())
  *           type: string
  *         actived:
  *           type: boolean
- * 
+ *
  */
 
 /**
@@ -47,18 +50,18 @@ RoleRouting.use(express.json())
  *           type: integer
  *         results:
  *           type: object
- * 
+ *
  */
 
-/** 
- * @swagger 
- * /api/v1/role/get-all: 
- *   get: 
+/**
+ * @swagger
+ * /api/v1/role/get-all:
+ *   get:
  *     tags:
  *       - Role
- *     description: Get all Data 
- *     responses:  
- *       200: 
+ *     description: Get all Data
+ *     responses:
+ *       200:
  *         description: Success
  *         content:
  *            application/json:
@@ -67,29 +70,29 @@ RoleRouting.use(express.json())
  */
 RoleRouting.get(CommonMethodConstant.GetAll, getAll);
 
-/** 
- * @swagger 
+/**
+ * @swagger
  * /api/v1/role/{id}:
- *   get: 
- *     tags: 
+ *   get:
+ *     tags:
  *       - Role
- *     description: Get data by Id 
- *     parameters: 
+ *     description: Get data by Id
+ *     parameters:
  *       - in: path
- *         name: id 
- *         description: Primary key 
- *         required: true 
+ *         name: id
+ *         description: Primary key
+ *         required: true
  *         schema:
- *             type: integer 
- *     responses:  
- *         200: 
+ *             type: integer
+ *     responses:
+ *         200:
  *             description:  Return ResponseDto
  *             content:
  *               application/json:
  *                 schema:
  *                   $ref: '#/components/schemas/ResponseDto'
- *             
- *   
+ *
+ *
  */
 RoleRouting.get(CommonMethodConstant.GetById, getById);
 
@@ -107,7 +110,7 @@ RoleRouting.get(CommonMethodConstant.GetById, getById);
  *             $ref: '#/components/schemas/CreateRoleRequest'
  *     responses:
  *       200:
- *         description: Returen ResponseDto
+ *         description: Return ResponseDto
  *         content:
  *           application/json:
  *             schema:
@@ -119,34 +122,34 @@ RoleRouting.get(CommonMethodConstant.GetById, getById);
 RoleRouting.post(CommonMethodConstant.Create, create);
 
 /**
-* @swagger
-* /api/v1/role/{id}:
-*   put:
-*     summary: Create a new book
-*     tags: [Role]
-*     parameters: 
-*       - in: path
-*         name: id 
-*         description: Primary key 
-*         required: true 
-*         schema:
-*             type: integer 
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/UpdateRoleRequest'
-*     responses:
-*       200:
-*         description: Returen ResponseDto
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/ResponseDto'
-*       500:
-*         description: Some server error
-*/
+ * @swagger
+ * /api/v1/role/{id}:
+ *   put:
+ *     summary: Create a new book
+ *     tags: [Role]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: Primary key
+ *         required: true
+ *         schema:
+ *             type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UpdateRoleRequest'
+ *     responses:
+ *       200:
+ *         description: Returen ResponseDto
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseDto'
+ *       500:
+ *         description: Some server error
+ */
 RoleRouting.put(CommonMethodConstant.Update, update);
 
 RoleRouting.delete(CommonMethodConstant.Delete, remove);

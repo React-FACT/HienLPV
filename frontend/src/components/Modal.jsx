@@ -1,5 +1,9 @@
 import React, { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { Modal, Button, Container, Col, Row, Form } from 'react-bootstrap';
+
+import { createUser } from '../redux/action/user';
+import modalLabel from '../constants/modal.constant';
 
 const formDataInit = {
   username: '',
@@ -26,7 +30,7 @@ const validMessageInit = {
   lastName: '',
 };
 
-function ModalComponent({ show, onHide }) {
+function ModalComponent({ show, onHide, type = 'add' }) {
   // Ref
   const ref = useRef();
 
@@ -34,6 +38,10 @@ function ModalComponent({ show, onHide }) {
   const [formData, setFormData] = useState(formDataInit);
   const [validMessage, setValidMessage] = useState(validMessageInit);
 
+  // Redux
+  const dispatch = useDispatch();
+
+  // Function
   const handleInputChange = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
   };
@@ -47,8 +55,19 @@ function ModalComponent({ show, onHide }) {
   };
 
   const handleFormSubmit = () => {
-    console.log(formData);
-    validateForm();
+    if (!validateForm()) return;
+
+    let dataPost = {
+      username: formData.username,
+      password: formData.password,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      roleId: formData.role === 'User' ? 2 : 1,
+    };
+
+    dispatch(createUser(dataPost));
+    handleModalClose();
   };
 
   const handleModalClose = () => {
@@ -89,7 +108,7 @@ function ModalComponent({ show, onHide }) {
       <Form>
         <Modal.Header>
           <Modal.Title id='contained-modal-title-vcenter'>
-            ADD NEW USER
+            {modalLabel[type].title.toUpperCase()}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className='show-grid'>
@@ -348,10 +367,10 @@ function ModalComponent({ show, onHide }) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant='secondary' onClick={handleModalClose}>
-            Cancel
+            {modalLabel[type].cancel}
           </Button>
           <Button variant='primary' onClick={handleFormSubmit}>
-            Save
+            {modalLabel[type].submit}
           </Button>
         </Modal.Footer>
       </Form>
