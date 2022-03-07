@@ -722,3 +722,35 @@
 [2022-03-06 13:42:28] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
 [2022-03-06 13:43:53] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
 [2022-03-06 13:43:53] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
+[2022-03-06 14:40:33] [[32minfo[39m]: ==================== constructor AuthenticationRepository====================
+[2022-03-06 14:40:33] [[32minfo[39m]: ==================== constructor AuthenticationService====================
+[2022-03-06 14:40:33] [[32minfo[39m]: ==================== constructor RoleRepository====================
+[2022-03-06 14:40:33] [[32minfo[39m]: ==================== constructor RoleService====================
+[2022-03-06 14:41:09] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
+[2022-03-06 14:41:09] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
+[2022-03-06 14:41:43] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
+[2022-03-06 14:41:43] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
+[2022-03-06 14:43:25] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
+[2022-03-06 14:43:25] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
+[2022-03-06 14:43:49] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
+[2022-03-06 14:43:49] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
+[2022-03-06 14:45:00] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
+[2022-03-06 14:45:00] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
+[2022-03-06 14:45:20] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
+[2022-03-06 14:45:20] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
+[2022-03-06 14:46:18] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
+[2022-03-06 14:46:18] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
+[2022-03-06 14:46:24] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
+[2022-03-06 14:46:24] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
+[2022-03-06 15:22:48] [[32minfo[39m]: ==================== AuthenticationService, call method Create ====================
+[2022-03-06 15:22:48] [[32minfo[39m]: ==================== AuthenticationRepository, call method Create ====================
+[2022-03-06 15:22:49] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
+[2022-03-06 15:22:49] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
+[2022-03-07 08:16:46] [[32minfo[39m]: ==================== constructor AuthenticationRepository====================
+[2022-03-07 08:16:46] [[32minfo[39m]: ==================== constructor AuthenticationService====================
+[2022-03-07 08:16:46] [[32minfo[39m]: ==================== constructor RoleRepository====================
+[2022-03-07 08:16:46] [[32minfo[39m]: ==================== constructor RoleService====================
+[2022-03-07 08:19:02] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
+[2022-03-07 08:19:02] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================
+[2022-03-07 08:19:07] [[32minfo[39m]: ==================== AuthenticationService, call method GetAll ====================
+[2022-03-07 08:19:07] [[32minfo[39m]: ==================== AuthenticationRepository, call method GetAll ====================

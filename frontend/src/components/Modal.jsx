@@ -3,19 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Modal, Button, Container, Col, Row, Form } from 'react-bootstrap';
 
 import { createUser } from '../redux/action/user';
-
-const modalLabel = {
-  add: {
-    title: 'add new user',
-    cancel: 'Cancel',
-    submit: 'Save',
-  },
-  edit: {
-    title: 'edit user',
-    cancel: 'Cancel',
-    submit: 'Change',
-  },
-};
+import modalLabel from '../constants/modal.constant';
 
 const formDataInit = {
   username: '',

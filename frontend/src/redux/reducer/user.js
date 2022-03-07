@@ -1,4 +1,4 @@
-import { FETCH_USER, CREATE_USER } from '../constant';
+import { FETCH_USER, CREATE_USER } from '../../constants/redux.constant';
 
 const user = (state = [], { type, payload }) => {
   switch (type) {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { baseURI } from './constant';
+import { baseURI } from '../constants/api.constant';
 
 const url = baseURI + 'auth/';
 
