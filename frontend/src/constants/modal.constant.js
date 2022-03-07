@@ -1,13 +1,15 @@
+import constants from './label.constant';
+
 const modalLabel = {
   add: {
-    title: 'add new user',
-    cancel: 'Cancel',
-    submit: 'Save',
+    title: constants.ADD_NEW_USER,
+    cancel: constants.CANCEL,
+    submit: constants.SAVE,
   },
   edit: {
-    title: 'edit user',
-    cancel: 'Cancel',
-    submit: 'Change',
+    title: constants.EDIT_USER,
+    cancel: constants.CANCEL,
+    submit: constants.CHANGE,
   },
 };
 

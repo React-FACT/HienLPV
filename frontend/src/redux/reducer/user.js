@@ -1,11 +1,13 @@
 import { FETCH_USER, CREATE_USER } from '../../constants/redux.constant';
 
-const user = (state = [], { type, payload }) => {
+const initialState = [];
+
+const user = (state = initialState, { type, payload }) => {
   switch (type) {
     case FETCH_USER:
       return payload;
     case CREATE_USER:
-      return payload;
+      return [...initialState, payload];
     default:
       break;
   }
