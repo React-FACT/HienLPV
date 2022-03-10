@@ -8,6 +8,7 @@ const {
   authGetAll,
   authGetById,
   create,
+  remove,
 } = require('../controllers/authentication.constroller');
 
 AuthenticationRouting.use(express.json());
@@ -126,5 +127,7 @@ AuthenticationRouting.get(CommonMethodConstant.GetById, authGetById);
  */
 
 AuthenticationRouting.post(CommonMethodConstant.Create, create);
+
+AuthenticationRouting.delete(CommonMethodConstant.Delete, remove);
 
 module.exports = { AuthenticationRouting };

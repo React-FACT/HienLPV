@@ -44,13 +44,12 @@ class BaseService {
     return responseDto;
   };
 
-  delete = (id) => {
+  delete = async (id) => {
     logger.info(
       `==================== ${this.constructor.name}, call method Delete ====================`
     );
     let responseDto = new ResponseDto();
-    this._repos.delete(id);
-    responseDto.results = true;
+    responseDto.results = await this._repos.delete(id);
     return responseDto;
   };
 }

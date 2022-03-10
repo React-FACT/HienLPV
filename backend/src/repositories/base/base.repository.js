@@ -54,13 +54,11 @@ class BaseRepository {
     return entity;
   };
 
-  delete = (id) => {
+  delete = async (id) => {
     logger.info(
       `==================== ${this.constructor.name}, call method Delete ====================`
     );
-    return this.repos.delete(id).then((t) => {
-      return t;
-    });
+    return await this.repos.destroy({ where: { id } });
   };
 }
 module.exports = { BaseRepository };

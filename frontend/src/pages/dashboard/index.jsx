@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
 import Modal from '../../components/Modal';
-import { fetchUsers } from '../../redux/action/user';
+import { fetchUsers, deleteUser } from '../../redux/action/user';
 import './dashboard.css';
 
 function Dashboard() {
@@ -18,6 +18,11 @@ function Dashboard() {
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
+
+  // Function
+  const handleUserDelete = (id) => {
+    dispatch(deleteUser(id));
+  };
 
   return (
     <div className='container-fluid'>
@@ -73,24 +78,16 @@ function Dashboard() {
                 <span>{user.actived === 1 ? 'Active' : 'Inactive'}</span>
               </td>
               <td>
-                <i
-                  className='fa fa-eye view'
-                  aria-hidden='true'
-                  id={user.id}
-                ></i>
+                <i className='fa fa-eye view' aria-hidden='true'></i>
               </td>
               <td>
-                <i
-                  className='fa fa-pencil edit'
-                  aria-hidden='true'
-                  id={user.id}
-                ></i>
+                <i className='fa fa-pencil edit' aria-hidden='true'></i>
               </td>
               <td>
                 <i
                   className='fa fa-trash delete'
                   aria-hidden='true'
-                  id={user.id}
+                  onClick={() => handleUserDelete(user.id)}
                 ></i>
               </td>
             </tr>
