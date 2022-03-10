@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Modal, Button, Container, Col, Row, Form } from 'react-bootstrap';
 
-import { createUser } from '../redux/action/user';
+import { createUser, updateUsers } from '../redux/action/user';
 import modalLabel from '../constants/modal.constant';
 
 const formDataInit = {
@@ -30,16 +30,37 @@ const validMessageInit = {
   lastName: '',
 };
 
-function ModalComponent({ show, onHide, type = 'add' }) {
+function ModalComponent({ show, onHide, user }) {
   // Ref
   const ref = useRef();
 
   // State
   const [formData, setFormData] = useState(formDataInit);
   const [validMessage, setValidMessage] = useState(validMessageInit);
+  const [type, setType] = useState('add');
 
   // Redux
   const dispatch = useDispatch();
+
+  // Effect
+  useEffect(() => {
+    if (user) {
+      Object.keys(user).forEach(
+        (key) => (user[key] = user[key] === null ? '' : user[key])
+      );
+      setType('edit');
+      setFormData({
+        ...formDataInit,
+        ...user,
+        role: user.roleId === 1 ? 'Administrator' : 'User',
+        status: user.actived === 1 ? 'Active' : 'Inactive',
+      });
+    }
+    return () => {
+      setType('add');
+      setFormData(formDataInit);
+    };
+  }, [user]);
 
   // Function
   const handleInputChange = ({ target }) => {
@@ -60,13 +81,19 @@ function ModalComponent({ show, onHide, type = 'add' }) {
     let dataPost = {
       username: formData.username,
       password: formData.password,
+      email: formData.email,
       firstName: formData.firstName,
       lastName: formData.lastName,
-      email: formData.email,
+      note: formData.note,
+      address: formData.address,
       roleId: formData.role === 'User' ? 2 : 1,
+      actived: formData.status === 'Inactive' ? 2 : 1,
     };
 
-    dispatch(createUser(dataPost));
+    type === 'add'
+      ? dispatch(createUser(dataPost))
+      : dispatch(updateUsers(user.id, dataPost));
+
     handleModalClose();
   };
 

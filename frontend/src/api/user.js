@@ -22,6 +22,15 @@ const createUser = async (body) => {
   }
 };
 
+const updateUser = async (id, body) => {
+  try {
+    const { data } = await axios.put(`${url}/${id}`, body);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const deleteUser = async (id) => {
   try {
     const { data } = await axios.delete(`${url}/${id}`);
@@ -31,6 +40,6 @@ const deleteUser = async (id) => {
   }
 };
 
-const userAPI = { fetchUsers, createUser, deleteUser };
+const userAPI = { fetchUsers, createUser, deleteUser, updateUser };
 
 export default userAPI;

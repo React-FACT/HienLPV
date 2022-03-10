@@ -1,7 +1,7 @@
 import {
   FETCH_USER,
-  CREATE_USER,
   DELETE_USER,
+  UPDATE_USER,
 } from '../../constants/redux.constant';
 import userAPI from '../../api/user';
 
@@ -15,11 +15,22 @@ export const fetchUsers = () => async (dispatch) => {
   }
 };
 
-export const createUser = (data) => async (dispatch) => {
-  const { errorCode, results } = await userAPI.createUser(data);
+export const createUser = (body) => async (dispatch) => {
+  const { errorCode } = await userAPI.createUser(body);
+  const { results } = await userAPI.fetchUsers();
   if (errorCode === 200) {
     dispatch({
-      type: CREATE_USER,
+      type: FETCH_USER,
+      payload: results,
+    });
+  }
+};
+
+export const updateUsers = (id, body) => async (dispatch) => {
+  const { errorCode, results } = await userAPI.updateUser(id, body);
+  if (errorCode === 200) {
+    dispatch({
+      type: UPDATE_USER,
       payload: results,
     });
   }

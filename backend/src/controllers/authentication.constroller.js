@@ -13,6 +13,12 @@ const create = async (req, res) => {
   res.json(await authenticationService.create(req.body));
 };
 
+const update = async (req, res) => {
+  res.json(
+    await authenticationService.update(parseInt(req.params.id), req.body)
+  );
+};
+
 const remove = async (req, res) => {
   res.json(await authenticationService.delete(req.params.id));
 };
@@ -22,4 +28,5 @@ module.exports = {
   authGetById,
   create,
   remove,
+  update,
 };

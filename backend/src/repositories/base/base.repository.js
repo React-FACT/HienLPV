@@ -47,7 +47,7 @@ class BaseRepository {
     logger.info(
       `==================== ${this.constructor.name}, call method Update ====================`
     );
-    let result = await this.repos.update(entity, {
+    await this.repos.update(entity, {
       where: { id: entity.id },
       returning: true,
     });

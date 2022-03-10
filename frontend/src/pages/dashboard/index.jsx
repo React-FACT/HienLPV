@@ -9,6 +9,7 @@ import './dashboard.css';
 function Dashboard() {
   // State
   const [modalShow, setModalShow] = useState(false);
+  const [userEdit, setUserEdit] = useState(null);
 
   // Redux
   const userList = useSelector((state) => state.user);
@@ -20,8 +21,18 @@ function Dashboard() {
   }, [dispatch]);
 
   // Function
-  const handleUserDelete = (id) => {
+  const handleDeleteUser = (id) => {
     dispatch(deleteUser(id));
+  };
+
+  const handleAddUser = () => {
+    setUserEdit(null);
+    setModalShow(true);
+  };
+
+  const handleEditUser = (user) => {
+    setUserEdit(user);
+    setModalShow(true);
   };
 
   return (
@@ -38,12 +49,7 @@ function Dashboard() {
             <th colSpan={2}>Activity Date</th>
             <th rowSpan={2}>Admin</th>
             <th rowSpan={2}>Status</th>
-            <th
-              rowSpan={2}
-              colSpan={3}
-              className='add'
-              onClick={() => setModalShow(true)}
-            >
+            <th rowSpan={2} colSpan={3} className='add' onClick={handleAddUser}>
               ADD&nbsp;<i className='fa fa-plus' aria-hidden='true'></i>
             </th>
           </tr>
@@ -81,13 +87,17 @@ function Dashboard() {
                 <i className='fa fa-eye view' aria-hidden='true'></i>
               </td>
               <td>
-                <i className='fa fa-pencil edit' aria-hidden='true'></i>
+                <i
+                  className='fa fa-pencil edit'
+                  aria-hidden='true'
+                  onClick={() => handleEditUser(user)}
+                ></i>
               </td>
               <td>
                 <i
                   className='fa fa-trash delete'
                   aria-hidden='true'
-                  onClick={() => handleUserDelete(user.id)}
+                  onClick={() => handleDeleteUser(user.id)}
                 ></i>
               </td>
             </tr>
@@ -103,7 +113,7 @@ function Dashboard() {
         </tfoot>
       </table>
       <div className='modalContainer'>
-        <Modal show={modalShow} onHide={setModalShow} />
+        <Modal show={modalShow} onHide={setModalShow} user={userEdit} />
       </div>
     </div>
   );
