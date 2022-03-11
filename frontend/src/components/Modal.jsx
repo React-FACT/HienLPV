@@ -4,6 +4,7 @@ import { Modal, Button, Container, Col, Row, Form } from 'react-bootstrap';
 
 import { createUser, updateUsers } from '../redux/action/user';
 import modalLabel from '../constants/modal.constant';
+import getObjectNotNull from '../utils/getObjectNotNull';
 
 const formDataInit = {
   username: '',
@@ -45,9 +46,7 @@ function ModalComponent({ show, onHide, user }) {
   // Effect
   useEffect(() => {
     if (user) {
-      Object.keys(user).forEach(
-        (key) => (user[key] = user[key] === null ? '' : user[key])
-      );
+      getObjectNotNull(user);
       setType('edit');
       setFormData({
         ...formDataInit,

@@ -4,10 +4,11 @@ import {
   UPDATE_USER,
 } from '../../constants/redux.constant';
 import userAPI from '../../api/user';
+import { statusCode } from '../../constants/api.constant';
 
 export const fetchUsers = () => async (dispatch) => {
   const { errorCode, results } = await userAPI.fetchUsers();
-  if (errorCode === 200) {
+  if (errorCode === statusCode.success) {
     dispatch({
       type: FETCH_USER,
       payload: results,
@@ -18,7 +19,7 @@ export const fetchUsers = () => async (dispatch) => {
 export const createUser = (body) => async (dispatch) => {
   const { errorCode } = await userAPI.createUser(body);
   const { results } = await userAPI.fetchUsers();
-  if (errorCode === 200) {
+  if (errorCode === statusCode.success) {
     dispatch({
       type: FETCH_USER,
       payload: results,
@@ -28,7 +29,7 @@ export const createUser = (body) => async (dispatch) => {
 
 export const updateUsers = (id, body) => async (dispatch) => {
   const { errorCode, results } = await userAPI.updateUser(id, body);
-  if (errorCode === 200) {
+  if (errorCode === statusCode.success) {
     dispatch({
       type: UPDATE_USER,
       payload: results,

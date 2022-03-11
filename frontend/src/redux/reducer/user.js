@@ -13,9 +13,7 @@ const user = (state = initialState, { type, payload }) => {
     case DELETE_USER:
       return state.filter((user) => user.id !== payload);
     case UPDATE_USER:
-      return state.map((user) =>
-        user.id === payload.id ? { ...user, ...payload } : user
-      );
+      return state.map((user) => (user.id === payload.id ? payload : user));
     default:
       break;
   }

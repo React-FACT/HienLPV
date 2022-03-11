@@ -3,6 +3,7 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 
 import { deleteUser } from '../redux/action/user';
+import { DATE_FORMAT } from '../constants/date.constant';
 
 const RowUser = ({ user, onEdit, onUserEditChange }) => {
   // Redux
@@ -23,9 +24,9 @@ const RowUser = ({ user, onEdit, onUserEditChange }) => {
       <td>{user.id}</td>
       <td>{user.lastName + ' ' + user.firstName}</td>
       <td>{user.email}</td>
-      <td>{moment(new Date()).format('D/M/Y')}</td>
-      <td>{moment(new Date()).format('D/M/Y')}</td>
-      <td>{moment(new Date()).format('D/M/Y')}</td>
+      <td>{moment(new Date()).format(DATE_FORMAT)}</td>
+      <td>{moment(new Date()).format(DATE_FORMAT)}</td>
+      <td>{moment(new Date()).format(DATE_FORMAT)}</td>
       <td>
         <input
           type='checkbox'

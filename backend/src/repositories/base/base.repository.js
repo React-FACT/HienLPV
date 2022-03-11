@@ -51,7 +51,7 @@ class BaseRepository {
       where: { id: entity.id },
       returning: true,
     });
-    return entity;
+    return await this.repos.findByPk(entity.id);
   };
 
   delete = async (id) => {

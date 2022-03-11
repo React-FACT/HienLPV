@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from './Modal';
 import RowUser from './RowUser';
+import tableLabel from '../constants/label.constant';
 import { fetchUsers } from '../redux/action/user';
 
 const TableUser = () => {
@@ -29,20 +30,21 @@ const TableUser = () => {
       <table id='tbUserList' className='table'>
         <thead>
           <tr>
-            <th rowSpan={2}>UserID</th>
-            <th rowSpan={2}>Full Name</th>
-            <th rowSpan={2}>Email</th>
-            <th rowSpan={2}>Birth Date</th>
-            <th colSpan={2}>Activity Date</th>
-            <th rowSpan={2}>Admin</th>
-            <th rowSpan={2}>Status</th>
+            <th rowSpan={2}>{tableLabel.UserID}</th>
+            <th rowSpan={2}>{tableLabel.Full_Name}</th>
+            <th rowSpan={2}>{tableLabel.Email}</th>
+            <th rowSpan={2}>{tableLabel.Birth_Date}</th>
+            <th colSpan={2}>{tableLabel.Activity_Date}</th>
+            <th rowSpan={2}>{tableLabel.Admin}</th>
+            <th rowSpan={2}>{tableLabel.Status}</th>
             <th rowSpan={2} colSpan={3} className='add' onClick={handleAddUser}>
-              ADD&nbsp;<i className='fa fa-plus' aria-hidden='true'></i>
+              {tableLabel.ADD}&nbsp;
+              <i className='fa fa-plus' aria-hidden='true'></i>
             </th>
           </tr>
           <tr>
-            <th>First login date</th>
-            <th>Last login date</th>
+            <th>{tableLabel.First_login_date}</th>
+            <th>{tableLabel.Last_login_date}</th>
           </tr>
         </thead>
         <tbody>
@@ -58,7 +60,7 @@ const TableUser = () => {
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan='8'>Tổng số đang active</td>
+            <td colSpan='8'>{tableLabel.ACTIVE}</td>
             <td colSpan='4'>
               {userList.filter((user) => user.actived === 1).length}
             </td>
