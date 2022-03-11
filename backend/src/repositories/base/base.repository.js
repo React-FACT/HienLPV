@@ -47,20 +47,18 @@ class BaseRepository {
     logger.info(
       `==================== ${this.constructor.name}, call method Update ====================`
     );
-    let result = await this.repos.update(entity, {
+    await this.repos.update(entity, {
       where: { id: entity.id },
       returning: true,
     });
-    return entity;
+    return await this.repos.findByPk(entity.id);
   };
 
-  delete = (id) => {
+  delete = async (id) => {
     logger.info(
       `==================== ${this.constructor.name}, call method Delete ====================`
     );
-    return this.repos.delete(id).then((t) => {
-      return t;
-    });
+    return await this.repos.destroy({ where: { id } });
   };
 }
 module.exports = { BaseRepository };
