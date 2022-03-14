@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
 
 import Modal from './Modal';
 import RowUser from './RowUser';
@@ -25,6 +26,7 @@ const TableUser = () => {
     setUserEdit(null);
     setModalShow(true);
   };
+
   return (
     <>
       <table id='tbUserList' className='table'>
@@ -48,21 +50,27 @@ const TableUser = () => {
           </tr>
         </thead>
         <tbody>
-          {userList.map((user, index) => (
-            <RowUser
-              key={index}
-              user={user}
-              index={index}
-              onUserEditChange={setUserEdit}
-              onEdit={setModalShow}
-            />
-          ))}
+          {userList.isLoading ? (
+            <Spinner animation='border' role='status'>
+              <span className='visually-hidden'>Loading...</span>
+            </Spinner>
+          ) : (
+            userList.data.map((user, index) => (
+              <RowUser
+                key={index}
+                user={user}
+                index={index}
+                onUserEditChange={setUserEdit}
+                onEdit={setModalShow}
+              />
+            ))
+          )}
         </tbody>
         <tfoot>
           <tr>
             <td colSpan='8'>{tableLabel.ACTIVE}</td>
             <td colSpan='4'>
-              {userList.filter((user) => user.actived === 1).length}
+              {userList.data.filter((user) => user.actived === 1).length}
             </td>
           </tr>
         </tfoot>

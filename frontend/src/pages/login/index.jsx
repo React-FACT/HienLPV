@@ -32,7 +32,7 @@ function Login() {
   };
 
   const handleFormSubmit = () => {
-    const user = userList.find(
+    const user = userList.data.find(
       (u) => u.email === userInput.email && u.password === userInput.password
     );
 
