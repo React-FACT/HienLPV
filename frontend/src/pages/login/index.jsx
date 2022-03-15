@@ -4,7 +4,7 @@ import { Container, Form, Alert } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 
 import './login.css';
-import { fetchUsers } from '../../redux/action/user';
+import userActions from '../../redux/action/user';
 
 function Login() {
   // State
@@ -18,7 +18,7 @@ function Login() {
 
   // Effect
   useEffect(() => {
-    dispatch(fetchUsers());
+    dispatch(userActions.fetchUsers());
   }, [dispatch]);
 
   // Function
@@ -32,7 +32,7 @@ function Login() {
   };
 
   const handleFormSubmit = () => {
-    const user = userList.data.find(
+    const user = userList.find(
       (u) => u.email === userInput.email && u.password === userInput.password
     );
 

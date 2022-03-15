@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Spinner } from 'react-bootstrap';
 
 import Modal from './Modal';
 import RowUser from './RowUser';
 import tableLabel from '../constants/label.constant';
-import { fetchUsers } from '../redux/action/user';
+import userActions from '../redux/action/user';
 
 const TableUser = () => {
   // State
@@ -18,7 +17,7 @@ const TableUser = () => {
 
   // Effect
   useEffect(() => {
-    dispatch(fetchUsers());
+    dispatch(userActions.fetchUsers());
   }, [dispatch]);
 
   // Function
@@ -50,27 +49,21 @@ const TableUser = () => {
           </tr>
         </thead>
         <tbody>
-          {userList.isLoading ? (
-            <Spinner animation='border' role='status'>
-              <span className='visually-hidden'>Loading...</span>
-            </Spinner>
-          ) : (
-            userList.data.map((user, index) => (
-              <RowUser
-                key={index}
-                user={user}
-                index={index}
-                onUserEditChange={setUserEdit}
-                onEdit={setModalShow}
-              />
-            ))
-          )}
+          {userList.map((user, index) => (
+            <RowUser
+              key={index}
+              user={user}
+              index={index}
+              onUserEditChange={setUserEdit}
+              onEdit={setModalShow}
+            />
+          ))}
         </tbody>
         <tfoot>
           <tr>
             <td colSpan='8'>{tableLabel.ACTIVE}</td>
             <td colSpan='4'>
-              {userList.data.filter((user) => user.actived === 1).length}
+              {userList.filter((user) => user.actived === 1).length}
             </td>
           </tr>
         </tfoot>

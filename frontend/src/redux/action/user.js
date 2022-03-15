@@ -1,33 +1,61 @@
-import {
-  FETCH_USER,
-  CREATE_USER,
-  DELETE_USER,
-  UPDATE_USER,
-} from '../../constants/redux.constant';
+import { userConstants } from '../../constants/redux.constant';
 
-export const fetchUsers = () => async (dispatch) => {
-  dispatch({
-    type: FETCH_USER,
-  });
+const userActions = {
+  fetchUsers() {
+    return {
+      type: userConstants.FETCH_USER,
+    };
+  },
+
+  createUser(user) {
+    return {
+      type: userConstants.CREATE_USER,
+      user,
+    };
+  },
+
+  updateUsers(id, user) {
+    return {
+      type: userConstants.UPDATE_USER,
+      id,
+      user,
+    };
+  },
+
+  deleteUser(id) {
+    return {
+      type: userConstants.DELETE_USER,
+      id,
+    };
+  },
+
+  fetchUsersSucceeded(payload) {
+    return {
+      type: userConstants.FETCH_USER_SUCCEEDED,
+      payload,
+    };
+  },
+
+  createUserSucceeded(payload) {
+    return {
+      type: userConstants.CREATE_USER_SUCCEEDED,
+      payload,
+    };
+  },
+
+  updateUsersSucceeded(payload) {
+    return {
+      type: userConstants.UPDATE_USER_SUCCEEDED,
+      payload,
+    };
+  },
+
+  deleteUserSucceeded(payload) {
+    return {
+      type: userConstants.DELETE_USER_SUCCEEDED,
+      payload,
+    };
+  },
 };
 
-export const createUser = (body) => async (dispatch) => {
-  dispatch({
-    type: CREATE_USER,
-    payload: body,
-  });
-};
-
-export const updateUsers = (id, body) => async (dispatch) => {
-  dispatch({
-    type: UPDATE_USER,
-    payload: { id, body },
-  });
-};
-
-export const deleteUser = (id) => async (dispatch) => {
-  dispatch({
-    type: DELETE_USER,
-    payload: id,
-  });
-};
+export default userActions;

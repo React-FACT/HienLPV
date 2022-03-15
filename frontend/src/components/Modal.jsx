@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Modal, Button, Container, Col, Row, Form } from 'react-bootstrap';
 
-import { createUser, updateUsers } from '../redux/action/user';
+import userActions from '../redux/action/user';
 import modalLabel from '../constants/modal.constant';
 import getObjectNotNull from '../utils/getObjectNotNull';
 
@@ -90,8 +90,8 @@ function ModalComponent({ show, onHide, user }) {
     };
 
     type === 'add'
-      ? dispatch(createUser(dataPost))
-      : dispatch(updateUsers(user.id, dataPost));
+      ? dispatch(userActions.createUser(dataPost))
+      : dispatch(userActions.updateUsers(user.id, dataPost));
 
     handleModalClose();
   };

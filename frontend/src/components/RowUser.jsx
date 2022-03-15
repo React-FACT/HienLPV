@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 
-import { deleteUser } from '../redux/action/user';
+import userActions from '../redux/action/user';
 import { DATE_FORMAT } from '../constants/date.constant';
 
 const RowUser = ({ user, onEdit, onUserEditChange }) => {
@@ -11,7 +11,7 @@ const RowUser = ({ user, onEdit, onUserEditChange }) => {
 
   // Function
   const handleDeleteUser = (id) => {
-    dispatch(deleteUser(id));
+    dispatch(userActions.deleteUser(id));
   };
 
   const handleEditUser = (user) => {
