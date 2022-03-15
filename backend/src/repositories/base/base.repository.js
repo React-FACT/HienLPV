@@ -40,7 +40,8 @@ class BaseRepository {
     logger.info(
       `==================== ${this.constructor.name}, call method Create ====================`
     );
-    return await this.repos.create(entity, { returning: true });
+    await this.repos.create(entity, { returning: true });
+    return await this.repos.findOne({ where: { ...entity } });
   };
 
   update = async (entity) => {

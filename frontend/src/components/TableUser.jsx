@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Modal from './Modal';
 import RowUser from './RowUser';
 import tableLabel from '../constants/label.constant';
-import { fetchUsers } from '../redux/action/user';
+import userActions from '../redux/action/user';
 
 const TableUser = () => {
   // State
@@ -17,7 +17,7 @@ const TableUser = () => {
 
   // Effect
   useEffect(() => {
-    dispatch(fetchUsers());
+    dispatch(userActions.fetchUsers());
   }, [dispatch]);
 
   // Function
@@ -25,6 +25,7 @@ const TableUser = () => {
     setUserEdit(null);
     setModalShow(true);
   };
+
   return (
     <>
       <table id='tbUserList' className='table'>
@@ -67,9 +68,11 @@ const TableUser = () => {
           </tr>
         </tfoot>
       </table>
-      <div className='modalContainer'>
-        <Modal show={modalShow} onHide={setModalShow} user={userEdit} />
-      </div>
+      {modalShow && (
+        <div className='modalContainer'>
+          <Modal show={modalShow} onHide={setModalShow} user={userEdit} />
+        </div>
+      )}
     </>
   );
 };

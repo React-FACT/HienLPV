@@ -2,15 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Form, Alert } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 
 import './login.css';
-import { fetchUsers } from '../../redux/action/user';
+import userActions from '../../redux/action/user';
 
 function Login() {
   // State
-  const [userInput, setUserInput] = useState({ email: '', password: '' });
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
   const [alert, setAlert] = useState({ show: false });
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: (values) => {
+      handleFormSubmit(values);
+    },
+  });
 
   // Redux
   const userList = useSelector((state) => state.user);
@@ -18,7 +27,7 @@ function Login() {
 
   // Effect
   useEffect(() => {
-    dispatch(fetchUsers());
+    dispatch(userActions.fetchUsers());
   }, [dispatch]);
 
   // Function
@@ -27,13 +36,9 @@ function Login() {
     setTimeout(() => setAlert({ show: false }), 2000);
   };
 
-  const handleFormInputChange = ({ target }) => {
-    setUserInput({ ...userInput, [target.name]: target.value });
-  };
-
-  const handleFormSubmit = () => {
+  const handleFormSubmit = ({ email, password }) => {
     const user = userList.find(
-      (u) => u.email === userInput.email && u.password === userInput.password
+      (u) => u.email === email && u.password === password
     );
 
     if (!user) return handleAlert('danger', 'Email or Password is Invalid!');
@@ -43,13 +48,13 @@ function Login() {
     setUser(user);
   };
 
-  if (user.roleId === 1) {
+  if (user?.roleId === 1) {
     return <Navigate to='/admin' replace={true} />;
   }
 
   return (
     <Container className='loginContainer'>
-      <Form>
+      <Form onSubmit={formik.handleSubmit}>
         <Alert show={alert.show} variant={alert.variant}>
           {alert.message}
         </Alert>
@@ -63,8 +68,8 @@ function Login() {
               type='email'
               name='email'
               placeholder='Email'
-              value={userInput.email}
-              onChange={handleFormInputChange}
+              value={formik.values.email}
+              onChange={formik.handleChange}
             />
           </Form.Group>
           <Form.Group className='form-group'>
@@ -73,13 +78,13 @@ function Login() {
               type='password'
               name='password'
               placeholder='Password'
-              value={userInput.password}
-              onChange={handleFormInputChange}
+              value={formik.values.password}
+              onChange={formik.handleChange}
             />
           </Form.Group>
-          <div className='btn-submit' onClick={handleFormSubmit}>
+          <button className='btn-submit' type='submit'>
             <i className='fa fa-arrow-right' aria-hidden='true'></i>
-          </div>
+          </button>
         </div>
       </Form>
     </Container>
