@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Modal, Button, Container, Col, Row, Form } from 'react-bootstrap';
+import { useFormik } from 'formik';
 
 import userActions from '../redux/action/user';
 import modalLabel from '../constants/modal.constant';
@@ -11,8 +12,6 @@ const formDataInit = {
   password: '',
   firstName: '',
   lastName: '',
-  role: 'User',
-  status: 'Active',
   email: '',
   phone: '',
   country: '',
@@ -36,57 +35,48 @@ function ModalComponent({ show, onHide, user }) {
   const ref = useRef();
 
   // State
-  const [formData, setFormData] = useState(formDataInit);
   const [validMessage, setValidMessage] = useState(validMessageInit);
   const [type, setType] = useState('add');
+  const formik = useFormik({
+    initialValues: user
+      ? {
+          ...formDataInit,
+          ...getObjectNotNull(user),
+          role: user.roleId === 1 ? 'Administrator' : 'User',
+          status: user.actived === 1 ? 'Active' : 'Inactive',
+        }
+      : formDataInit,
+    onSubmit: (values) => {
+      handleFormSubmit(values);
+    },
+  });
 
   // Redux
   const dispatch = useDispatch();
 
   // Effect
   useEffect(() => {
-    if (user) {
-      getObjectNotNull(user);
-      setType('edit');
-      setFormData({
-        ...formDataInit,
-        ...user,
-        role: user.roleId === 1 ? 'Administrator' : 'User',
-        status: user.actived === 1 ? 'Active' : 'Inactive',
-      });
-    }
-    return () => {
-      setType('add');
-      setFormData(formDataInit);
-    };
+    setType(user ? 'edit' : 'add');
   }, [user]);
 
   // Function
-  const handleInputChange = ({ target }) => {
-    setFormData({ ...formData, [target.name]: target.value });
-  };
-
   const handleInputBlur = ({ target }) => {
     showValidMessage(target.name);
   };
 
-  const handleFileChange = ({ target }) => {
-    setFormData({ ...formData, file: target.files[0] });
-  };
-
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (values) => {
     if (!validateForm()) return;
 
     let dataPost = {
-      username: formData.username,
-      password: formData.password,
-      email: formData.email,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      note: formData.note,
-      address: formData.address,
-      roleId: formData.role === 'User' ? 2 : 1,
-      actived: formData.status === 'Inactive' ? 2 : 1,
+      username: values.username,
+      password: values.password,
+      email: values.email,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      note: values.note,
+      address: values.address,
+      roleId: values.role === 'User' ? 2 : 1,
+      actived: values.status === 'Inactive' ? 2 : 1,
     };
 
     type === 'add'
@@ -98,7 +88,6 @@ function ModalComponent({ show, onHide, user }) {
 
   const handleModalClose = () => {
     ref.current.value = '';
-    setFormData(formDataInit);
     setValidMessage(validMessageInit);
     onHide(false);
   };
@@ -107,7 +96,7 @@ function ModalComponent({ show, onHide, user }) {
     let isValid = true;
     let newValidMessage = { ...validMessageInit };
     Object.keys(validMessage).forEach((i) => {
-      if (formData[i] === '') {
+      if (formik.values[i] === '') {
         newValidMessage[i] = i + ' is required';
         isValid = false;
       }
@@ -117,7 +106,7 @@ function ModalComponent({ show, onHide, user }) {
   };
 
   const showValidMessage = (name) => {
-    formData[name] === ''
+    formik.values[name] === ''
       ? setValidMessage({
           ...validMessage,
           [name]: `${name} is required`,
@@ -131,7 +120,7 @@ function ModalComponent({ show, onHide, user }) {
       show={show}
       aria-labelledby='contained-modal-title-vcenter'
     >
-      <Form>
+      <Form onSubmit={formik.handleSubmit}>
         <Modal.Header>
           <Modal.Title id='contained-modal-title-vcenter'>
             {modalLabel[type].title.toUpperCase()}
@@ -149,9 +138,9 @@ function ModalComponent({ show, onHide, user }) {
                     <Form.Control
                       type='text'
                       name='username'
-                      value={formData.username}
+                      value={formik.values.username}
                       onBlur={handleInputBlur}
-                      onChange={handleInputChange}
+                      onChange={formik.handleChange}
                     />
                     <Form.Text className='text-danger'>
                       {validMessage.username}
@@ -168,9 +157,9 @@ function ModalComponent({ show, onHide, user }) {
                     <Form.Control
                       type='password'
                       name='password'
-                      value={formData.password}
+                      value={formik.values.password}
                       onBlur={handleInputBlur}
-                      onChange={handleInputChange}
+                      onChange={formik.handleChange}
                     />
                     <Form.Text className='text-danger'>
                       {validMessage.password}
@@ -190,8 +179,8 @@ function ModalComponent({ show, onHide, user }) {
                     <Form.Control
                       type='text'
                       name='firstName'
-                      value={formData.firstName}
-                      onChange={handleInputChange}
+                      value={formik.values.firstName}
+                      onChange={formik.handleChange}
                     />
                     <Form.Text className='text-danger'></Form.Text>
                   </Col>
@@ -206,9 +195,9 @@ function ModalComponent({ show, onHide, user }) {
                     <Form.Control
                       type='text'
                       name='lastName'
-                      value={formData.lastName}
+                      value={formik.values.lastName}
                       onBlur={handleInputBlur}
-                      onChange={handleInputChange}
+                      onChange={formik.handleChange}
                     />
                     <Form.Text className='text-danger'>
                       {validMessage.lastName}
@@ -227,8 +216,8 @@ function ModalComponent({ show, onHide, user }) {
                   <Col lg={8}>
                     <Form.Select
                       name='role'
-                      value={formData.role}
-                      onChange={handleInputChange}
+                      value={formik.values.role}
+                      onChange={formik.handleChange}
                     >
                       <option value='Administrator'>Administrator</option>
                       <option value='User'>User</option>
@@ -245,8 +234,8 @@ function ModalComponent({ show, onHide, user }) {
                   <Col lg={8}>
                     <Form.Select
                       name='status'
-                      value={formData.status}
-                      onChange={handleInputChange}
+                      value={formik.values.status}
+                      onChange={formik.handleChange}
                     >
                       <option value='Active'>Active</option>
                       <option value='Inactive'>Inactive</option>
@@ -265,9 +254,9 @@ function ModalComponent({ show, onHide, user }) {
                 <Form.Control
                   type='email'
                   name='email'
-                  value={formData.email}
+                  value={formik.values.email}
                   onBlur={handleInputBlur}
-                  onChange={handleInputChange}
+                  onChange={formik.handleChange}
                 />
                 <Form.Text className='text-danger'>
                   {validMessage.email}
@@ -288,8 +277,8 @@ function ModalComponent({ show, onHide, user }) {
                 <Form.Control
                   type='text'
                   name='phone'
-                  value={formData.phone}
-                  onChange={handleInputChange}
+                  value={formik.values.phone}
+                  onChange={formik.handleChange}
                 />
                 <Form.Text className='text-danger'></Form.Text>
               </Col>
@@ -304,8 +293,8 @@ function ModalComponent({ show, onHide, user }) {
                       <Col>
                         <Form.Select
                           name='country'
-                          value={formData.country}
-                          onChange={handleInputChange}
+                          value={formik.values.country}
+                          onChange={formik.handleChange}
                         >
                           <option value=''>Quốc gia</option>
                         </Form.Select>
@@ -313,8 +302,8 @@ function ModalComponent({ show, onHide, user }) {
                       <Col>
                         <Form.Select
                           name='city'
-                          value={formData.city}
-                          onChange={handleInputChange}
+                          value={formik.values.city}
+                          onChange={formik.handleChange}
                         >
                           <option value=''>Thành phố</option>
                         </Form.Select>
@@ -326,8 +315,8 @@ function ModalComponent({ show, onHide, user }) {
                       <Col>
                         <Form.Select
                           name='district'
-                          value={formData.district}
-                          onChange={handleInputChange}
+                          value={formik.values.district}
+                          onChange={formik.handleChange}
                         >
                           <option value=''>Quận</option>
                         </Form.Select>
@@ -335,8 +324,8 @@ function ModalComponent({ show, onHide, user }) {
                       <Col>
                         <Form.Select
                           name='ward'
-                          value={formData.ward}
-                          onChange={handleInputChange}
+                          value={formik.values.ward}
+                          onChange={formik.handleChange}
                         >
                           <option value=''>Phường</option>
                         </Form.Select>
@@ -353,8 +342,8 @@ function ModalComponent({ show, onHide, user }) {
                 <Form.Control
                   type='text'
                   name='address'
-                  value={formData.address}
-                  onChange={handleInputChange}
+                  value={formik.values.address}
+                  onChange={formik.handleChange}
                 />
                 <Form.Text className='text-danger'></Form.Text>
               </Col>
@@ -369,8 +358,8 @@ function ModalComponent({ show, onHide, user }) {
                   as='textarea'
                   col='5'
                   name='note'
-                  value={formData.note}
-                  onChange={handleInputChange}
+                  value={formik.values.note}
+                  onChange={formik.handleChange}
                 />
                 <Form.Text className='text-danger'></Form.Text>
               </Col>
@@ -383,7 +372,9 @@ function ModalComponent({ show, onHide, user }) {
               <Col lg={10}>
                 <Form.Control
                   type='file'
-                  onChange={handleFileChange}
+                  onChange={(e) =>
+                    formik.setFieldValue('file', e.target.files[0])
+                  }
                   ref={ref}
                 />
                 <Form.Text className='text-danger'></Form.Text>
@@ -395,7 +386,7 @@ function ModalComponent({ show, onHide, user }) {
           <Button variant='secondary' onClick={handleModalClose}>
             {modalLabel[type].cancel}
           </Button>
-          <Button variant='primary' onClick={handleFormSubmit}>
+          <Button variant='primary' type='submit'>
             {modalLabel[type].submit}
           </Button>
         </Modal.Footer>

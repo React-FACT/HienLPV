@@ -68,9 +68,11 @@ const TableUser = () => {
           </tr>
         </tfoot>
       </table>
-      <div className='modalContainer'>
-        <Modal show={modalShow} onHide={setModalShow} user={userEdit} />
-      </div>
+      {modalShow && (
+        <div className='modalContainer'>
+          <Modal show={modalShow} onHide={setModalShow} user={userEdit} />
+        </div>
+      )}
     </>
   );
 };
